@@ -1,3 +1,4 @@
+import java.util.Iterator;
 
 public class PositionalList <T> implements PositionalListInterface<T> {
 
@@ -168,6 +169,45 @@ public class PositionalList <T> implements PositionalListInterface<T> {
         return false;
 
     }
+
+    /*
+    * notice that for each loop while running use iterator as underlying process
+     */
+
+    private class MyIterator implements Iterator<T>{
+
+        private Position<T> pointer;
+
+        public MyIterator(){
+
+            pointer = header.next;
+
+        }
+
+        @Override
+        public boolean hasNext() {
+            return pointer != tailer.prev;
+        }
+
+        @Override
+        public T next() {
+
+            if(hasNext() == false) return null;
+
+            pointer = pointer.next;
+
+            return pointer.data;
+
+        }
+
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator();
+    }
+
+    
 
     
 }
