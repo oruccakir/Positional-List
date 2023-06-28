@@ -66,6 +66,8 @@ public class PositionalList <T> implements PositionalListInterface<T> {
 
         Position<T> first = header, second = header.next;
 
+        size++;
+
         return addBetween(first, second, data);
 
     }
@@ -74,6 +76,8 @@ public class PositionalList <T> implements PositionalListInterface<T> {
     public Position<T> addLast(T data) {
         
         Position<T> first = tailer.prev, second = tailer;
+
+        size++;
 
         return addBetween(first, second, data);
 
@@ -84,6 +88,8 @@ public class PositionalList <T> implements PositionalListInterface<T> {
         
         Position<T> first = p.prev, second = p;
 
+        size++;
+
         return addBetween(first, second, data);
 
     }
@@ -92,6 +98,8 @@ public class PositionalList <T> implements PositionalListInterface<T> {
     public Position<T> addAfter(Position<T> p, T data) {
         
         Position<T> first = p, second = p.next;
+
+        size++;
 
         return addBetween(first, second, data);
 
@@ -128,6 +136,8 @@ public class PositionalList <T> implements PositionalListInterface<T> {
         p.prev = null;
         p.data = null;
 
+        size--;
+
         return deletedElement;
 
     }
@@ -147,7 +157,7 @@ public class PositionalList <T> implements PositionalListInterface<T> {
 
         }
 
-        System.out.print("]");
+        System.out.println("]");
 
     }
     
@@ -170,6 +180,30 @@ public class PositionalList <T> implements PositionalListInterface<T> {
 
     }
 
+    @Override
+    public boolean equals(Object obj){
+
+        if(obj == null) return false;
+
+        if(obj.getClass() != this.getClass()) return false;
+
+        PositionalList<T> other = (PositionalList<T>) obj;
+
+        if(this.size() != other.size()) return false;
+
+        Iterator<T> first = this.iterator();
+        Iterator<T> second = other.iterator();
+
+        while(first.hasNext() && second.hasNext()){
+
+            if(first.next().equals(second.next()) == false) return false;
+
+        }
+
+        return true;
+
+    }
+
     /*
     * notice that for each loop while running use iterator as underlying process
      */
@@ -180,7 +214,7 @@ public class PositionalList <T> implements PositionalListInterface<T> {
 
         public MyIterator(){
 
-            pointer = header.next;
+            pointer = header;
 
         }
 
