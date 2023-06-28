@@ -1,4 +1,4 @@
-public interface PositionalListInterface <T> {
+public interface PositionalListInterface <T> extends Iterable<T>{
 
     ////////////////////////////////////////// Accessor Methods 
     /*

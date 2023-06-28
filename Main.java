@@ -1,17 +1,28 @@
+import java.util.Iterator;
+
 public class Main {
 
     public static void main(String[] args) {
         
         PositionalList<Integer> list = new PositionalList<>();
 
-        Position<Integer> p1 = list.addLast(8);
-        Position<Integer> p2 = list.addAfter(p1, 5);
-        Position<Integer> p3 = list.addBefore(p2, 3);
-        Position<Integer> p0 = list.addFirst(9);
-        Integer data = list.remove(list.last());
-        System.out.println(data);
-        list.set(p1,7);
-        System.out.println(list.remove(p2));
+        for(int i=0; i<10; i++){
+            list.addLast(i);
+        }
+
+        Iterator<Integer> it = list.iterator();
+
+        while(it.hasNext()){
+            System.out.println(it.next());
+        }
+
+        System.out.println("//////////////////////////////");
+
+        for(Integer t : list){
+            System.out.println(t);
+        }
+
+        
 
         
 
